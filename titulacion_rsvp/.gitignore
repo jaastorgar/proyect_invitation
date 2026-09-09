@@ -1,0 +1,35 @@
+# Variables de entorno (NUNCA subir secretos)
+.env
+.env.local
+.env.production
+
+# Entorno virtual
+venv/
+env/
+ENV/
+
+# Base de datos SQLite (si la usas)
+db.sqlite3
+db.sqlite3-journal
+
+# Archivos estáticos recopilados
+staticfiles/
+
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

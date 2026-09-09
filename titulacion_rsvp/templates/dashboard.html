@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard RSVP | Admin</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <!-- Navegación Superior -->
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <i class="fa-solid fa-graduation-cap"></i> RSVP Admin
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'crear_invitacion' %}" class="nav-link">
+                <i class="fa-solid fa-plus"></i> Nueva Invitación
+            </a>
+            <a href="/admin/" class="nav-link">
+                <i class="fa-solid fa-gear"></i> Django Admin
+            </a>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Header del Dashboard -->
+        <header class="dash-header">
+            <h1><i class="fa-solid fa-chart-simple"></i> Panel de Control</h1>
+            <p class="subtitle">Métricas en tiempo real del evento</p>
+            <div class="refresh-info">
+                <i class="fa-solid fa-rotate"></i>
+                <span id="last-update">Actualizando...</span>
+                <button onclick="actualizarDashboard()" class="btn-refresh" title="Actualizar ahora">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Grid de Métricas -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+                <h2 id="metric-invitaciones">{{ total_invitaciones }}</h2>
+                <p>Invitaciones Creadas</p>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+                <h2 id="metric-confirmados">{{ total_confirmados }}</h2>
+                <p>Confirmados</p>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <h2 id="metric-personas">{{ total_personas }}</h2>
+                <p>Total Personas</p>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fa-solid fa-user-xmark"></i>
+                </div>
+                <h2 id="metric-rechazados">{{ total_rechazados }}</h2>
+                <p>Rechazados</p>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-icon">
+                    <i class="fa-solid fa-hourglass-half"></i>
+                </div>
+                <h2 id="metric-pendientes">{{ total_pendientes }}</h2>
+                <p>Pendientes</p>
+            </div>
+        </div>
+
+        <!-- Tabla de Invitaciones -->
+        <div class="table-wrapper">
+            <div class="table-header">
+                <span><i class="fa-solid fa-database"></i> Registro de Invitaciones</span>
+                <span class="badge-count" id="badge-count">{{ invitaciones|length }} registros</span>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Invitado</th>
+                            <th>Estado</th>
+                            <th>Acompañantes</th>
+                            <th>Mensaje</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <!-- TBODY VACÍO: Se llena dinámicamente vía JavaScript -->
+                    <tbody id="tabla-invitaciones">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de notificación -->
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-check-circle"></i>
+        <span>Link copiado al portapapeles</span>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
