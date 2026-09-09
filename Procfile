@@ -1,1 +1,1 @@
-web: gunicorn titulacion_rsvp.wsgi:application
+web: python -m gunicorn titulacion_rsvp.wsgi:application
