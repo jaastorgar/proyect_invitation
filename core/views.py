@@ -276,3 +276,22 @@ def dashboard_api_view(request):
         'total_personas': total_personas,
         'lista_invitaciones': lista_invitaciones,
     })
+
+
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+def crear_superusuario_temporal(request):
+    """
+    Vista TEMPORAL para crear superusuario en producción.
+    ELIMINAR DESPUÉS DE USAR por seguridad.
+    """
+    if not User.objects.filter(username='admin').exists():
+        User.objects.create_superuser(
+            username='admin',
+            email='tu@email.com',
+            password='TuPassword123!'  # Cambia esta contraseña
+        )
+        return HttpResponse("✅ Superusuario creado exitosamente. Usuario: admin | Contraseña: TuPassword123!")
+    else:
+        return HttpResponse("️ El superusuario ya existe.")

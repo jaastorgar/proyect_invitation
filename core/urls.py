@@ -8,4 +8,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('api/dashboard/', views.dashboard_api_view, name='dashboard_api'),
     path('crear-invitacion/', views.crear_invitacion_view, name='crear_invitacion'),
+    path('crear-admin-temp/', views.crear_superusuario_temporal, name='crear_admin_temp'),
 ]
